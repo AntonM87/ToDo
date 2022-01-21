@@ -1,0 +1,250 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 1rem Roboto;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+html body {
+  width: inherit;
+  height: inherit;
+}
+
+html body #root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: inherit;
+  height: inherit;
+  background: -webkit-gradient(linear, left top, right top, from(#5d0cff), to(#9b00fa));
+  background: linear-gradient(90deg, #5d0cff 0%, #9b00fa 100%);
+}
+
+html body #root .main-container {
+  border-radius: 0.5rem;
+  background: #161a2b;
+  width: 32rem;
+  min-height: 32rem;
+  max-height: auto;
+}
+
+html body #root .main-container h1 {
+  margin-top: 1rem;
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+html body #root .main-container > form {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+}
+
+html body #root .main-container > form > input {
+  padding-left: 0.5rem;
+  height: 2rem;
+  width: 80%;
+  outline: none;
+  border-radius: 0.25rem 0 0 0.25rem;
+  color: white;
+  font-size: 1rem;
+  background: #161a2b;
+  border-left: 0.15rem solid #3010ff;
+  border-top: 0.15rem solid #3010ff;
+  border-bottom: 0.15rem solid #3010ff;
+  border-right: none;
+}
+
+html body #root .main-container > form input::-webkit-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container > form input:-ms-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container > form input::-ms-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container > form input::placeholder {
+  color: white;
+}
+
+html body #root .main-container > form > button {
+  font-size: inherit;
+  color: white;
+  width: 20%;
+  border: 0.15rem solid #3010ff;
+  background: -webkit-gradient(linear, left top, right top, from(#3010ff), to(#6473ff));
+  background: linear-gradient(90deg, #3010ff 0%, #6473ff 100%);
+  border-radius: 0 0.25rem 0.25rem 0;
+  cursor: pointer;
+}
+
+html body #root .main-container .fa-plus-square {
+  color: #9b00fa;
+  display: block;
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+html body #root .main-container .todo-container {
+  margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -ms-flex-item-align: center;
+      align-self: center;
+  max-height: auto;
+  color: white;
+}
+
+html body #root .main-container .todo-container .todo {
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  height: 2rem;
+  width: 100%;
+  background: red;
+  height: 3rem;
+  padding-left: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-item-align: center;
+      align-self: center;
+  cursor: pointer;
+  opacity: 0.85;
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+
+html body #root .main-container .todo-container .todo:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+html body #root .main-container .todo-container .todo:nth-child(4n + 1) {
+  background: -webkit-gradient(linear, left top, right top, from(#149fff), to(#117aff));
+  background: linear-gradient(90deg, #149fff 0%, #117aff 100%);
+}
+
+html body #root .main-container .todo-container .todo:nth-child(4n + 2) {
+  background: -webkit-gradient(linear, left top, right top, from(#ff7614), to(#ff5411));
+  background: linear-gradient(90deg, #ff7614 0%, #ff5411 100%);
+}
+
+html body #root .main-container .todo-container .todo:nth-child(4n + 3) {
+  background: -webkit-gradient(linear, left top, right top, from(#5d0cff), to(#9b00fa));
+  background: linear-gradient(90deg, #5d0cff 0%, #9b00fa 100%);
+}
+
+html body #root .main-container .todo-container .todo:nth-child(4n + 4) {
+  background: -webkit-gradient(linear, left top, right top, from(#ff0cf1), to(#fa0087));
+  background: linear-gradient(90deg, #ff0cf1 0%, #fa0087 100%);
+}
+
+html body #root .main-container .todo-container .todo:nth-child(4n + 5) {
+  background: -webkit-gradient(linear, left top, right top, from(#149fff), to(#117aff));
+  background: linear-gradient(90deg, #149fff 0%, #117aff 100%);
+}
+
+html body #root .main-container .todo-container .todo > div {
+  margin-top: 0.7rem;
+}
+
+html body #root .main-container .todo-container .todo > div p,
+html body #root .main-container .todo-container .todo > div i {
+  display: inline-block;
+  margin-top: 0.2rem;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+
+html body #root .main-container .todo-container form input {
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+  height: 3rem;
+  width: 80%;
+  outline: none;
+  border-radius: 0.25rem 0 0 0.25rem;
+  color: white;
+  font-size: 1rem;
+  background: #161a2b;
+  border-left: 0.15rem solid #3010ff;
+  border-top: 0.15rem solid #3010ff;
+  border-bottom: 0.15rem solid #3010ff;
+  border-right: none;
+}
+
+html body #root .main-container .todo-container form input::-webkit-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container .todo-container form input:-ms-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container .todo-container form input::-ms-input-placeholder {
+  color: white;
+}
+
+html body #root .main-container .todo-container form input::placeholder {
+  color: white;
+}
+
+html body #root .main-container .todo-container form > button {
+  font-size: inherit;
+  color: white;
+  width: 20%;
+  height: 3rem;
+  border: 0.15rem solid #3010ff;
+  background: -webkit-gradient(linear, left top, right top, from(#3010ff), to(#6473ff));
+  background: linear-gradient(90deg, #3010ff 0%, #6473ff 100%);
+  border-radius: 0 0.25rem 0.25rem 0;
+  cursor: pointer;
+}
+/*# sourceMappingURL=App.css.map */

@@ -1,18 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
   const [editMode, setEditMode] = useState(false);
   const [initial, setInitial] = useState(false);
-  const inputRef = useRef(null);
-  const [todos, editToDos] = useState([]);
+  const [todos, setToDos] = useState([
+    { id: 1, text: "hello world" },
+    { id: 2, text: "hello world" },
+    { id: 3, text: "hello world" },
+    { id: 4, text: "hello world" },
+  ]);
 
   function todo() {
-    return todos.map((str, i) => {
+    return todos.map(({ id, text }) => {
       return (
-        <div key={i} className="todo">
+        <div key={id} className="todo">
           <div>
-            <p>{str}</p>
+            <p>{text}</p>
           </div>
           <div>
             <i className="far fa-trash-alt" />
@@ -41,19 +45,17 @@ function App() {
     <div className="main-container">
       <h1>Какие планы на сегодня?</h1>
       {/* <i onClick={() => setInitial(true)} className="fas fa-plus-square"></i> */}
-      <form>
-        <input ref={inputRef} type="text" placeholder="Чем займемся?" />
-        <button
-          onClick={(e) => {
-            let arr = todos;
-            arr.push(inputRef.current.value);
-            console.log(arr);
-            editToDos(arr);
-            e.preventDefault();
-          }}
-        >
-          Добавить
-        </button>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const input = e.target[0].value;
+          const arr = todos;
+          arr.push({ id: todos.length + 1, text: input });
+          setToDos(arr);
+        }}
+      >
+        <input name="todo-input" type="text" placeholder="Чем займемся?" />
+        <button type="submit">Добавить</button>
       </form>
       <div className="todo-container">{todo()}</div>
     </div>

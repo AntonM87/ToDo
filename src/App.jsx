@@ -2,8 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [editMode, setEditMode] = useState(false);
-  const [initial, setInitial] = useState(false);
+  // const [editMode, setEditMode] = useState(false);
   const [todos, setToDos] = useState([
     { id: 1, text: "hello world" },
     { id: 2, text: "hello world" },
@@ -11,35 +10,16 @@ function App() {
     { id: 4, text: "hello world" },
   ]);
 
-  function todo() {
-    return todos.map(({ id, text }) => {
-      return (
-        <div key={id} className="todo">
-          <div>
-            <p>{text}</p>
-          </div>
-          <div>
-            <i className="far fa-trash-alt" />
-            <i
-              onClick={() => setEditMode(!editMode)}
-              className="far fa-edit"
-            ></i>
-          </div>
-        </div>
-      );
-    });
-  }
-
-  function editTodo() {
-    return (
-      <form>
-        <input type="text" />
-        <button>
-          <i onClick={() => setEditMode(!editMode)} className="far fa-edit"></i>
-        </button>
-      </form>
-    );
-  }
+  // function editTodo() {
+  //   return (
+  //     <form>
+  //       <input type="text" />
+  //       <button>
+  //         <i onClick={() => setEditMode(!editMode)} className="far fa-edit"></i>
+  //       </button>
+  //     </form>
+  //   );
+  // }
 
   return (
     <div className="main-container">
@@ -57,7 +37,21 @@ function App() {
         <input name="todo-input" type="text" placeholder="Чем займемся?" />
         <button type="submit">Добавить</button>
       </form>
-      <div className="todo-container">{todo()}</div>
+      <div className="todo-container">
+        {todos.map(({ id, text }) => {
+          return (
+            <div key={id} className="todo">
+              <div>
+                <p>{text}</p>
+              </div>
+              <div>
+                <i className="far fa-trash-alt" />
+                <i className="far fa-edit"></i>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

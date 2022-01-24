@@ -1,54 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Task from "./layout/Task";
 import "./App.css";
 
 function App() {
-  // const [editMode, setEditMode] = useState(false);
-  const [todos, setToDos] = useState([
-    { id: 1, text: "hello world" },
-    { id: 2, text: "hello world" },
-    { id: 3, text: "hello world" },
-    { id: 4, text: "hello world" },
-  ]);
+  const [todos, setToDos] = useState(JSON.parse(localStorage.getItem("todos")));
 
-  // function editTodo() {
-  //   return (
-  //     <form>
-  //       <input type="text" />
-  //       <button>
-  //         <i onClick={() => setEditMode(!editMode)} className="far fa-edit"></i>
-  //       </button>
-  //     </form>
-  //   );
-  // }
+  const deletTask = (task) => {
+    const state = todos.filter(({ text }) => {
+      return text !== task;
+    });
+    setToDos(state);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  });
 
   return (
     <div className="main-container">
       <h1>Какие планы на сегодня?</h1>
-      {/* <i onClick={() => setInitial(true)} className="fas fa-plus-square"></i> */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
           const input = e.target[0].value;
+          e.target[0].value = "";
           const arr = todos;
-          arr.push({ id: todos.length + 1, text: input });
-          setToDos(arr);
+          arr.push({ id: Math.random(), text: input });
+          setToDos([...arr]);
         }}
+        action="#"
       >
         <input name="todo-input" type="text" placeholder="Чем займемся?" />
         <button type="submit">Добавить</button>
       </form>
       <div className="todo-container">
-        {todos.map(({ id, text }) => {
+        {console.log(todos)}
+        {todos.map(({ id, text },i) => {
           return (
-            <div key={id} className="todo">
-              <div>
-                <p>{text}</p>
-              </div>
-              <div>
-                <i className="far fa-trash-alt" />
-                <i className="far fa-edit"></i>
-              </div>
-            </div>
+            <Task
+              todos={todos}
+              setToDos={setToDos}
+              deletTask={deletTask}
+              index={i}
+              key={id}
+              text={text}
+            />
           );
         })}
       </div>

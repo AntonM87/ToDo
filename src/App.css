@@ -204,6 +204,18 @@ html body #root .main-container .todo-container .todo > div i {
   font-size: 1.1rem;
 }
 
+html body #root .main-container .todo-container .complited {
+  opacity: 0.5;
+}
+
+html body #root .main-container .todo-container .complited p {
+  text-decoration: line-through;
+}
+
+html body #root .main-container .todo-container .complited:hover {
+  opacity: 1;
+}
+
 html body #root .main-container .todo-container form input {
   margin-top: 1rem;
   padding-left: 0.5rem;

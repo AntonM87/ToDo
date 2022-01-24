@@ -181,6 +181,15 @@ html {
               }
             }
           }
+          .complited {
+            opacity: 0.5;
+            p {
+              text-decoration: line-through;
+            }
+            &:hover {
+              opacity: 1;
+            }
+          }
           form {
             input {
               margin-top: 1rem;

@@ -213,7 +213,7 @@ html body #root .main-container .todo-container .complited p {
 }
 
 html body #root .main-container .todo-container .complited:hover {
-  opacity: 1;
+  opacity: .5;
 }
 
 html body #root .main-container .todo-container form input {

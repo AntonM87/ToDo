@@ -1,16 +1,22 @@
 import { useState } from "react";
 
 function Task(props) {
-  const { todos, setToDos, index, text, deletTask } = props;
+  const { todos, setToDos, index, text, deletTask, complitedStatus } = props;
   const [editMode, setEditMode] = useState(true);
   const [inputValue, setInputValue] = useState(text);
-  const [complited, setComplit] = useState(false);
+  const [complited, setComplit] = useState(complitedStatus);
 
-  function task() {
-    let className = complited ? "complited" : "";
+  const task = () => {
+    const className = complited ? "complited" : "";
     return (
       <div
-        onClick={() => setComplit(!complited)}
+        onClick={() => {
+          let arr = [];
+          arr = todos;
+          arr[index].complitedTask = !complited;
+          setToDos([...arr]);
+          setComplit(!complited);
+        }}
         className={`todo ${className}`}
       >
         <div>
@@ -33,20 +39,13 @@ function Task(props) {
         </div>
       </div>
     );
-  }
-  function taskEdit() {
+  };
+  const taskEdit = () => {
     return (
       <form
         action="#"
         onSubmit={(e) => {
-          setInputValue(e.target[0].value);
-
-          const arr = todos;
-          arr[index].text = inputValue;
-          setToDos([...arr]);
-
-          setEditMode(!editMode);
-          e.preventDefault();
+          submit(e);
         }}
       >
         <input
@@ -58,7 +57,16 @@ function Task(props) {
         </button>
       </form>
     );
-  }
+  };
+  const submit = (e) => {
+    setInputValue(e.target[0].value);
+
+    const arr = todos;
+    arr[index].text = inputValue;
+    setToDos([...arr]);
+    setEditMode(!editMode);
+    e.preventDefault();
+  };
   return <>{editMode ? task() : taskEdit()}</>;
 }
 export default Task;

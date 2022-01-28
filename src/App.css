@@ -18,6 +18,7 @@ html body {
 }
 
 html body #root {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -213,7 +214,7 @@ html body #root .main-container .todo-container .complited p {
 }
 
 html body #root .main-container .todo-container .complited:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 html body #root .main-container .todo-container form input {
@@ -258,5 +259,37 @@ html body #root .main-container .todo-container form > button {
   background: linear-gradient(90deg, #3010ff 0%, #6473ff 100%);
   border-radius: 0 0.25rem 0.25rem 0;
   cursor: pointer;
+}
+
+html body #root .main-container .modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.7;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body #root .main-container .modal .modal-wrapper {
+  border-radius: 10px;
+  width: 40vw;
+  height: 40vh;
+  background: red;
+  z-index: 1;
 }
 /*# sourceMappingURL=App.css.map */

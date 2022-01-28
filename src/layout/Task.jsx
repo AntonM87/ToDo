@@ -1,10 +1,19 @@
 import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 
 function Task(props) {
-  const { todos, setToDos, index, text, deletTask, complitedStatus } = props;
+  const { todos, setToDos, id, index, text, deletTask, complitedStatus } =
+    props;
   const [editMode, setEditMode] = useState(true);
   const [inputValue, setInputValue] = useState(text);
   const [complited, setComplit] = useState(complitedStatus);
+
+  const moveEnd = async (todos, index) => {
+    const target = await todos[index];
+    await todos.splice(index, 1);
+    await todos.push(target);
+    setToDos([...todos]);
+  };
 
   const task = () => {
     const className = complited ? "complited" : "";
@@ -23,13 +32,7 @@ function Task(props) {
           <p>{inputValue}</p>
         </div>
         <div>
-          <i
-            onClick={() => {
-              setComplit(false);
-              deletTask(inputValue);
-            }}
-            className="far fa-trash-alt"
-          />
+          <i onClick={() => deletTask(id)} className="far fa-trash-alt" />
           <i
             onClick={() => {
               setEditMode(!editMode);
@@ -60,7 +63,6 @@ function Task(props) {
   };
   const submit = (e) => {
     setInputValue(e.target[0].value);
-
     const arr = todos;
     arr[index].text = inputValue;
     setToDos([...arr]);

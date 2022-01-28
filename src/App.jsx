@@ -1,24 +1,31 @@
 import { useState, useEffect } from "react";
 import Task from "./layout/Task";
+import Modal from "./layout/Modal";
 import "./App.css";
 
 function App() {
-  const [todos, setToDos] = useState(JSON.parse(localStorage.getItem("todos")));
+  const todoStorage = JSON.parse(localStorage.getItem("todos")) || [];
+  const [todos, setToDos] = useState(todoStorage);
+  const [modal, setModal] = useState(false);
 
-  const deletTask = (task) => {
-    const state = todos.filter(({ text }) => {
-      return text !== task;
-    });
-    setToDos(state);
+  const deletTask = async (taskId) => {
+    const filteredTodos = await todos.filter(({ id }) => id !== taskId);
+    setToDos(filteredTodos);
+  };
+
+  const validation = (value) => {
+    value === "" ? setModal(true) : setModal(false);
   };
 
   const submit = (e) => {
     e.preventDefault();
-    const input = e.target[0].value;
+    todos.unshift({
+      id: Date.now(),
+      text: validation(e.target[0].value),
+      complitedTask: false,
+    });
     e.target[0].value = "";
-    const arr = todos;
-    arr.push({ id: Math.random(), text: input, complitedTask: false });
-    setToDos([...arr]);
+    setToDos([...todos]);
   };
 
   useEffect(() => {
@@ -26,7 +33,6 @@ function App() {
   });
 
   const createList = () => {
-    console.log(todos);
     const list = todos.map(({ id, text, complitedTask }, i) => {
       return (
         <Task
@@ -34,9 +40,10 @@ function App() {
           setToDos={setToDos}
           deletTask={deletTask}
           index={i}
-          key={id}
+          id={id}
           text={text}
           complitedStatus={complitedTask}
+          key={id}
         />
       );
     });
@@ -45,6 +52,7 @@ function App() {
 
   return (
     <div className="main-container">
+      {modal ? <Modal/> : null}
       <h1>Какие планы на сегодня?</h1>
       <form
         onSubmit={(e) => {

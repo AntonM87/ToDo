@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
 
 function Task({
   todos,
@@ -7,29 +6,30 @@ function Task({
   id,
   index,
   text,
-  deletTask,
+  deleteTask,
   complitedStatus,
+  saveChange,
 }) {
   const [editMode, setEditMode] = useState(true);
   const [inputValue, setInputValue] = useState(text);
   const [complited, setComplit] = useState(complitedStatus);
 
-  const moveEnd = async (todos, index) => {
-    const target = await todos[index];
-    await todos.splice(index, 1);
-    await todos.push(target);
-    setToDos([...todos]);
-  };
+  // const moveEnd = async (todos, index) => {
+  //   const target = await todos[index];
+  //   await todos.splice(index, 1);
+  //   await todos.push(target);
+  //   setToDos([...todos]);
+  // };
+
+  console.log("inputValue",inputValue);
 
   const task = () => {
     const className = complited ? "complited" : "";
     return (
       <div
         onClick={() => {
-          let arr = [];
-          arr = todos;
-          arr[index].complitedTask = !complited;
-          setToDos([...arr]);
+          todos[index].complitedTask = !complited;
+          setToDos([...todos]);
           setComplit(!complited);
         }}
         className={`todo ${className}`}
@@ -38,10 +38,16 @@ function Task({
           <p>{inputValue}</p>
         </div>
         <div>
-          <i onClick={() => deletTask(id)} className="far fa-trash-alt" />
+          <i
+            onClick={() => {
+              deleteTask(id);
+            }}
+            className="far fa-trash-alt"
+          />
           <i
             onClick={() => {
               setEditMode(!editMode);
+              setComplit(false);
             }}
             className="far fa-edit"
           ></i>
@@ -67,14 +73,16 @@ function Task({
       </form>
     );
   };
+
   const submit = (e) => {
     setInputValue(e.target[0].value);
-    const arr = todos;
-    arr[index].text = inputValue;
-    setToDos([...arr]);
+    // todos[index].text = inputValue;
+    // setToDos([...todos]);
+    saveChange(index, inputValue);
     setEditMode(!editMode);
     e.preventDefault();
   };
+
   return <>{editMode ? task() : taskEdit()}</>;
 }
 export default Task;

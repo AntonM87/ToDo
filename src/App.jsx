@@ -8,7 +8,7 @@ function App() {
   const [todos, setToDos] = useState(todoStorage);
   const [modal, setModal] = useState(false);
 
-  const deletTask = async (taskId) => {
+  const deleteTask = async (taskId) => {
     const filteredTodos = await todos.filter(({ id }) => id !== taskId);
     setToDos(filteredTodos);
   };
@@ -21,10 +21,10 @@ function App() {
   const submit = (e) => {
     e.preventDefault();
 
-    if (findCopy(todos, e.target[0].value)) {
-      setModal(true);
-      e.stopPropagation();
-    }
+    // if (console.log(findCopy(todos, e.target[0].value))) {
+    //   setModal(true);
+    //   e.stopPropagation();
+    // }
 
     todos.unshift({
       id: Date.now(),
@@ -39,23 +39,26 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   });
 
-  const createList = () => {
-    const list = todos.map(({ id, text, complitedTask }, i) => {
-      return (
-        <Task
-          todos={todos}
-          setToDos={setToDos}
-          deletTask={deletTask}
-          index={i}
-          id={id}
-          text={text}
-          complitedStatus={complitedTask}
-          key={id}
-        />
-      );
-    });
-    return list;
-  };
+  const createList = todos.map(({ id, text, complitedTask }, index) => {
+    return (
+      <Task
+        todos={todos}
+        setToDos={setToDos}
+        saveChange={saveChange}
+        deleteTask={deleteTask}
+        index={index}
+        id={id}
+        text={text}
+        complitedStatus={complitedTask}
+        key={id}
+      />
+    );
+  });
+
+   function saveChange (index, text) {
+    todos[index] = text;
+    setToDos([...todos]);
+  }
 
   return (
     <div className="main-container">
@@ -70,7 +73,7 @@ function App() {
         <input name="todo-input" type="text" placeholder="Чем займемся?" />
         <button type="submit">Добавить</button>
       </form>
-      <div className="todo-container">{createList()}</div>
+      <div className="todo-container">{createList}</div>
     </div>
   );
 }

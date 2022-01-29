@@ -15,10 +15,17 @@ function App() {
 
   const validation = (value) => {
     value === "" ? setModal(true) : setModal(false);
+    return value;
   };
 
   const submit = (e) => {
     e.preventDefault();
+
+    if (findCopy(todos, e.target[0].value)) {
+      setModal(true);
+      e.stopPropagation();
+    }
+
     todos.unshift({
       id: Date.now(),
       text: validation(e.target[0].value),
@@ -52,7 +59,7 @@ function App() {
 
   return (
     <div className="main-container">
-      {modal ? <Modal/> : null}
+      {modal ? <Modal /> : null}
       <h1>Какие планы на сегодня?</h1>
       <form
         onSubmit={(e) => {
@@ -68,3 +75,9 @@ function App() {
   );
 }
 export default App;
+
+const findCopy = (arr, value) => {
+  return arr.find(
+    ({ id, text, complitedTask }) => value.toLowerCase() === text.toLowerCase()
+  );
+};

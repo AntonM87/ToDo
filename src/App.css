@@ -55,8 +55,8 @@ html body #root .main-container h1 {
 
 html body #root .main-container > form {
   margin-top: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -71,8 +71,8 @@ html body #root .main-container > form {
 
 html body #root .main-container > form > input {
   padding-left: 0.5rem;
-  height: 2rem;
-  width: 80%;
+  height: 3rem;
+  width: 100%;
   outline: none;
   border-radius: 0.25rem 0 0 0.25rem;
   color: white;
@@ -139,7 +139,7 @@ html body #root .main-container .todo-container {
 html body #root .main-container .todo-container .todo {
   margin-top: 1rem;
   border-radius: 0.25rem;
-  height: 2rem;
+  height: 3rem;
   width: 100%;
   background: red;
   height: 3rem;
@@ -285,11 +285,17 @@ html body #root .main-container .modal {
           align-items: center;
 }
 
-html body #root .main-container .modal .modal-wrapper {
+html body #root .main-container .modal .modal-background {
   border-radius: 10px;
   width: 40vw;
   height: 40vh;
   background: red;
   z-index: 1;
+}
+
+html body #root .main-container .modal .modal-message-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 /*# sourceMappingURL=App.css.map */

@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 
-function Task(props) {
-  const { todos, setToDos, id, index, text, deletTask, complitedStatus } =
-    props;
+function Task({
+  todos,
+  setToDos,
+  id,
+  index,
+  text,
+  deletTask,
+  complitedStatus,
+}) {
   const [editMode, setEditMode] = useState(true);
   const [inputValue, setInputValue] = useState(text);
   const [complited, setComplit] = useState(complitedStatus);

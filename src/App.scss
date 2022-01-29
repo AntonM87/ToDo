@@ -55,7 +55,7 @@ $main-background-color: #161a2b;
 $margin05rem: 0.5rem;
 $margin1rem: 1rem;
 $margin2rem: 2rem;
-$height: 2rem;
+$height: 3rem;
 * {
   padding: 0;
   margin: 0;
@@ -91,15 +91,15 @@ html {
         }
         > form {
           margin-top: $margin1rem;
-          margin-left: $margin2rem;
-          margin-right: $margin2rem;
+          margin-left: $margin1rem;
+          margin-right: $margin1rem;
           display: flex;
           flex-direction: row;
           justify-content: stretch;
           > input {
             padding-left: 0.5rem;
             height: $height;
-            width: 80%;
+            width: 100%;
             outline: none;
             border-radius: $border-radius 0 0 $border-radius;
             color: white;
@@ -236,12 +236,17 @@ html {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          .modal-wrapper {
+          .modal-background {
             border-radius: 10px;
             width: 40vw;
             height: 40vh;
             background: red;
             z-index: 1;
+          }
+          .modal-message-wrapper {
+            position: absolute;
+            top: 10px;
+            right: 10px;
           }
         }
       }

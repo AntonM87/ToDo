@@ -14,21 +14,15 @@ function Task({
   const [inputValue, setInputValue] = useState(text);
   const [complited, setComplit] = useState(complitedStatus);
 
-  // const moveEnd = async (todos, index) => {
-  //   const target = await todos[index];
-  //   await todos.splice(index, 1);
-  //   await todos.push(target);
-  //   setToDos([...todos]);
-  // };
-
-  console.log("inputValue",inputValue);
-
-  const task = () => {
+  function task() {
     const className = complited ? "complited" : "";
+
     return (
       <div
         onClick={() => {
+          // вынести в отдельную функцию
           todos[index].complitedTask = !complited;
+
           setToDos([...todos]);
           setComplit(!complited);
         }}
@@ -54,7 +48,7 @@ function Task({
         </div>
       </div>
     );
-  };
+  }
   const taskEdit = () => {
     return (
       <form
@@ -74,13 +68,17 @@ function Task({
     );
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
+    e.preventDefault();
+
     setInputValue(e.target[0].value);
+    console.log("inputValue", inputValue);
+
     // todos[index].text = inputValue;
     // setToDos([...todos]);
-    saveChange(index, inputValue);
-    setEditMode(!editMode);
-    e.preventDefault();
+
+    await saveChange(index, inputValue);
+    setEditMode(false);
   };
 
   return <>{editMode ? task() : taskEdit()}</>;

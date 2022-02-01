@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Task from "./layout/Task";
 import Modal from "./layout/Modal";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   const todoStorage = JSON.parse(localStorage.getItem("todos")) || [];
@@ -26,13 +26,15 @@ function App() {
     //   e.stopPropagation();
     // }
 
-    todos.unshift({
-      id: Date.now(),
-      text: validation(e.target[0].value),
-      complitedTask: false,
-    });
+    setToDos([
+      {
+        id: Date.now(),
+        text: validation(e.target[0].value),
+        complitedTask: false,
+      },
+      ...todos,
+    ]);
     e.target[0].value = "";
-    setToDos([...todos]);
   };
 
   useEffect(() => {
@@ -47,7 +49,7 @@ function App() {
         saveChange={saveChange}
         deleteTask={deleteTask}
         index={index}
-        id={id}
+        id={Date.now()}
         text={text}
         complitedStatus={complitedTask}
         key={id}
@@ -55,7 +57,7 @@ function App() {
     );
   });
 
-   function saveChange (index, text) {
+  function saveChange(index, text) {
     todos[index] = text;
     setToDos([...todos]);
   }

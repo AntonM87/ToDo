@@ -15,14 +15,12 @@ function Task({
   const [complited, setComplit] = useState(complitedStatus);
 
   function task() {
-    const className = complited ? "complited" : "";
+    const className = complited ? "complited" : null;
 
     return (
       <div
         onClick={() => {
-          // вынести в отдельную функцию
           todos[index].complitedTask = !complited;
-
           setToDos([...todos]);
           setComplit(!complited);
         }}
@@ -34,7 +32,7 @@ function Task({
         <div>
           <i
             onClick={() => {
-              deleteTask(id);
+              deleteTask(id, todos, setToDos);
             }}
             className="far fa-trash-alt"
           />
@@ -77,7 +75,7 @@ function Task({
     // todos[index].text = inputValue;
     // setToDos([...todos]);
 
-    await saveChange(index, inputValue);
+    saveChange(index, text, todos, setToDos);
     setEditMode(false);
   };
 

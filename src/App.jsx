@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Task from "./layout/Task";
+import Filters from "./layout/Filters";
 import "./App.scss";
 
 function App() {
   const todoStorage = JSON.parse(localStorage.getItem("todos")) || [];
   const [todos, setToDos] = useState(todoStorage);
-  // const [todos, setToDos] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -36,7 +37,32 @@ function App() {
     setToDos([...todos]);
   };
 
-  const taskList = todos.map(({ id, text, complited }, index) => (
+  const filterHandler = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const unfinishedFilter = (todos) =>
+    todos.filter(({ complited }) => !complited);
+
+  const finishedFilter = (todos) => todos.filter(({ complited }) => complited);
+
+  const filteredTodos = () => {
+    let result;
+    switch (filter) {
+      case "unfinished":
+        result = unfinishedFilter(todos);
+        break;
+      case "finished":
+        result = finishedFilter(todos);
+        break;
+      default:
+        result = todos;
+        break;
+    }
+    return result;
+  };
+
+  const taskList = filteredTodos().map(({ id, text, complited }, index) => (
     <Task
       id={id}
       key={id}
@@ -55,6 +81,7 @@ function App() {
         <input name="todo-input" type="text" placeholder="Чем займемся?" />
         <button type="submit">Добавить</button>
       </form>
+      <Filters filterHandler={filterHandler} />
       <div className="todo-container">{taskList}</div>
     </div>
   );

@@ -7,34 +7,13 @@ function Task({ id, text, complitedStatus, index, deletItem, editItem }) {
 
   const className = complited ? "complited" : null;
 
-  // const task = () => {};
-
-  // const taskEdit = (e) => {
-
-  // };
-
-  return (
-    <>
-      <div
-        onClick={() => {
-          setComplit(!complited);
-        }}
-        className={`todo ${className}`}
-      >
-        <div>
-          <p>{text}</p>
-        </div>
-        <div>
-          <i onClick={() => deletItem(id)} className="far fa-trash-alt" />
-          <i className="far fa-edit"></i>
-        </div>
-      </div>
-
+  const editTask = () => {
+    return (
       <form
         onSubmit={(e) => {
           editItem(index, e.target[0].value);
-          // setEditMode(false);
-          // setComplit(false);
+          setEditMode(!editMode);
+          setComplit(false);
           e.preventDefault();
         }}
       >
@@ -46,7 +25,34 @@ function Task({ id, text, complitedStatus, index, deletItem, editItem }) {
           <i className="far fa-edit"></i>
         </button>
       </form>
-    </>
-  );
+    );
+  };
+
+  const showTask = () => {
+    return (
+      <div
+        onClick={() => {
+          setComplit(!complited);
+        }}
+        className={`todo ${className}`}
+      >
+        <div>
+          <p>{text}</p>
+        </div>
+        <div>
+          <i onClick={() => deletItem(id)} className="far fa-trash-alt" />
+          <i
+            onClick={() => {
+              setEditMode(!editMode);
+              console.log(editMode);
+            }}
+            className="far fa-edit"
+          ></i>
+        </div>
+      </div>
+    );
+  };
+
+  return <>{editMode ? editTask() : showTask()}</>;
 }
 export default Task;

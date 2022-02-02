@@ -130,7 +130,7 @@ html {
           cursor: pointer;
         }
         .todo-container {
-          margin: $margin1rem;
+          margin: 0.1rem $margin1rem $margin1rem $margin1rem;
           display: flex;
           flex-direction: column;
           justify-content: stretch;
@@ -138,7 +138,7 @@ html {
           max-height: auto;
           color: white;
           .todo {
-            margin-top: $margin1rem;
+            margin-top: 1rem;
             border-radius: $border-radius;
             height: $height;
             width: 100%;
@@ -152,6 +152,9 @@ html {
             cursor: pointer;
             opacity: 0.85;
             transition: all linear 0.2s;
+            &:nth-child(1) {
+              margin-top: 0;
+            }
             &:hover {
               opacity: 1;
               transform: scale(1.01);
@@ -193,8 +196,6 @@ html {
           }
           form {
             input {
-              margin-top: 1rem;
-
               padding-left: 0.5rem;
               height: 3rem;
               width: 80%;

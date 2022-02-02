@@ -1,0 +1,22 @@
+.filters {
+  height: 3rem;
+  margin: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 1rem;
+  border: 0.15rem solid #3010ff;
+  border-radius: 0.25rem;
+  form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    label {
+      color: white;
+      cursor: pointer;
+      input {
+        margin-right: 0.5rem;
+        cursor: inherit;
+      }
+    }
+  }
+}

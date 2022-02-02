@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Task from "./layout/Task";
 import Filters from "./layout/Filters";
+import Counters from "./layout/Counters";
 import "./App.scss";
 
 function App() {
@@ -26,6 +27,11 @@ function App() {
     ]);
     e.target[0].value = "";
     e.preventDefault();
+  };
+
+  const complitHandler = (index, value) => {
+    todos[index].complited = value || !todos[index].complited;
+    setToDos([...todos]);
   };
 
   const deletItem = (taskId) => {
@@ -71,6 +77,7 @@ function App() {
       complitedStatus={complited}
       deletItem={deletItem}
       editItem={editItem}
+      complitHandler={complitHandler}
     />
   ));
 
@@ -82,6 +89,7 @@ function App() {
         <button type="submit">Добавить</button>
       </form>
       <Filters filterHandler={filterHandler} />
+      <Counters todos={todos} />
       <div className="todo-container">{taskList}</div>
     </div>
   );

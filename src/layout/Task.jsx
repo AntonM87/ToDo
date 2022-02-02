@@ -1,11 +1,18 @@
 import { useState } from "react";
 
-function Task({ id, text, complitedStatus, index, deletItem, editItem }) {
+function Task({
+  id,
+  text,
+  complitedStatus,
+  index,
+  deletItem,
+  editItem,
+  complitHandler,
+}) {
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(text);
-  const [complited, setComplit] = useState(complitedStatus);
 
-  const className = complited ? "complited" : null;
+  const className = complitedStatus ? "complited" : null;
 
   const editTask = () => {
     return (
@@ -13,7 +20,7 @@ function Task({ id, text, complitedStatus, index, deletItem, editItem }) {
         onSubmit={(e) => {
           editItem(index, e.target[0].value);
           setEditMode(!editMode);
-          setComplit(false);
+          complitHandler(index, false);
           e.preventDefault();
         }}
       >
@@ -32,7 +39,7 @@ function Task({ id, text, complitedStatus, index, deletItem, editItem }) {
     return (
       <div
         onClick={() => {
-          setComplit(!complited);
+          complitHandler(index);
         }}
         className={`todo ${className}`}
       >

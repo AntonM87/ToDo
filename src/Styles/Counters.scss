@@ -1,0 +1,17 @@
+.counters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+  border: 0.15rem solid #3010ff;
+  color: white;
+
+  p {
+    color: inherit;
+  }
+}

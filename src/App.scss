@@ -152,9 +152,6 @@ html {
             cursor: pointer;
             opacity: 0.85;
             transition: all linear 0.2s;
-            &:nth-child(1) {
-              margin-top: 0;
-            }
             &:hover {
               opacity: 1;
               transform: scale(1.01);
@@ -209,9 +206,9 @@ html {
               border-top: 0.15rem solid $input-border-color;
               border-bottom: 0.15rem solid $input-border-color;
               border-right: none;
-            }
-            input::placeholder {
-              color: white;
+              &::placeholder {
+                color: white;
+              }
             }
             > button {
               font-size: inherit;

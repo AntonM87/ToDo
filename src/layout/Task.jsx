@@ -12,7 +12,7 @@ function Task({
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(text);
 
-  const className = complitedStatus ? "complited" : null;
+  const className = complitedStatus ? "complited" : '';
 
   const editTask = () => {
     return (

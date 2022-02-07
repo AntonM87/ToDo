@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
 import Task from "./layout/Task";
 import Filters from "./layout/Filters";
 import Counters from "./layout/Counters";
@@ -11,6 +12,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
+    console.log(todos);
   });
 
   const addItem = (e) => {
@@ -22,7 +24,7 @@ function App() {
     }
 
     setToDos([
-      { id: Date.now(), text: e.target[0].value, complited: false },
+      { id: nanoid(), text: e.target[0].value, complited: false },
       ...todos,
     ]);
     e.target[0].value = "";
@@ -38,9 +40,8 @@ function App() {
     setToDos([...(await todos.filter(({ id }) => id != taskId))]);
   };
 
-  const editItem = (index, text) => {
-    todos[index].text = text;
-    setToDos([...todos]);
+  const editItem = (idTask, text) => {
+    setToDos([...(todos.find(({ id }) => id === idTask).text = text)]);
   };
 
   const filterHandler = (e) => {

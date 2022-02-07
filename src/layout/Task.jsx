@@ -12,13 +12,13 @@ function Task({
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(text);
 
-  const className = complitedStatus ? "complited" : '';
+  const className = complitedStatus ? "complited" : "";
 
   const editTask = () => {
     return (
       <form
         onSubmit={(e) => {
-          editItem(index, e.target[0].value);
+          editItem(id, e.target[0].value);
           setEditMode(!editMode);
           complitHandler(index, false);
           e.preventDefault();
@@ -51,7 +51,6 @@ function Task({
           <i
             onClick={() => {
               setEditMode(!editMode);
-              console.log(editMode);
             }}
             className="far fa-edit"
           ></i>

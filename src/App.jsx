@@ -9,10 +9,10 @@ function App() {
   const todoStorage = JSON.parse(localStorage.getItem("todos")) || [];
   const [todos, setToDos] = useState(todoStorage);
   const [filter, setFilter] = useState("all");
+  const [currentTask, setCurrentTask] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    console.log(todos);
   });
 
   const addItem = (e) => {
@@ -31,8 +31,10 @@ function App() {
     e.preventDefault();
   };
 
-  const complitHandler = (index, value) => {
-    todos[index].complited = value || !todos[index].complited;
+  const complitHandler = async (idTask) => {
+    const task = await todos.find(({ id }) => id === idTask);
+    const taskStatus = task.complited;
+    task.complited = !taskStatus;
     setToDos([...todos]);
   };
 
@@ -69,16 +71,50 @@ function App() {
     return result;
   };
 
+  const dragStartHandler = (e, index) => {
+    e.target.style.opacity = "1";
+    setCurrentTask(index);
+  };
+  const dragEndHandler = (e) => {
+    e.target.style.opacity = "1";
+  };
+  const dragOverHandler = (e) => {
+    e.target.style.opacity = "0.5";
+    e.preventDefault();
+  };
+  const dropHandler = (e, index) => {
+    e.target.style.opacity = "1";
+
+    todos.forEach((todo, i) => {
+      if (index === i) {
+        const startTodo = todos[currentTask];
+        const endTodo = todos[i];
+        todos[currentTask] = endTodo;
+        todos[i] = startTodo;
+        setToDos([...todos]);
+      }
+      return todo;
+    });
+    e.preventDefault();
+  };
+
   const taskList = filteredTodos().map(({ id, text, complited }, index) => (
     <Task
       id={id}
       key={id}
       text={text}
+      todos={todos}
       index={index}
       complitedStatus={complited}
       deletItem={deletItem}
       editItem={editItem}
       complitHandler={complitHandler}
+      dragStartHandler={dragStartHandler}
+      dragEndHandler={dragEndHandler}
+      dragOverHandler={dragOverHandler}
+      dropHandler={dropHandler}
+      currentTask={currentTask}
+      setCurrentTask={setCurrentTask}
     />
   ));
 

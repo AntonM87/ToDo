@@ -152,6 +152,9 @@ html {
             cursor: pointer;
             opacity: 0.85;
             transition: all linear 0.2s;
+            &:active {
+              cursor: grabbing;
+            }
             &:hover {
               opacity: 1;
               transform: scale(1.01);
@@ -183,12 +186,10 @@ html {
             }
           }
           .complited {
-            opacity: 0.5;
+            background: #2f3240 !important;
             p {
               text-decoration: line-through;
-            }
-            &:hover {
-              opacity: 0.5;
+              color: #4d5160;
             }
           }
           form {

@@ -4,10 +4,17 @@ function Task({
   id,
   text,
   complitedStatus,
+  todos,
   index,
   deletItem,
   editItem,
   complitHandler,
+  dragStartHandler,
+  dragEndHandler,
+  dragOverHandler,
+  dropHandler,
+  currentTask,
+  setCurrentTask,
 }) {
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(text);
@@ -20,7 +27,7 @@ function Task({
         onSubmit={(e) => {
           editItem(id, e.target[0].value);
           setEditMode(!editMode);
-          complitHandler(index, false);
+          complitHandler(id);
           e.preventDefault();
         }}
       >
@@ -38,8 +45,14 @@ function Task({
   const showTask = () => {
     return (
       <div
+        onDragStart={(e) => dragStartHandler(e, index)}
+        onDragLeave={(e) => dragEndHandler(e)}
+        onDragEnd={(e) => dragEndHandler(e)}
+        onDragOver={(e) => dragOverHandler(e)}
+        onDrop={(e) => dropHandler(e, index)}
+        draggable={true}
         onClick={() => {
-          complitHandler(index);
+          complitHandler(id);
         }}
         className={`todo ${className}`}
       >

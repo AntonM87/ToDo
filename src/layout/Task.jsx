@@ -60,7 +60,13 @@ function Task({
           <p>{text}</p>
         </div>
         <div>
-          <i onClick={() => deletItem(id)} className="far fa-trash-alt" />
+          <i
+            onClick={(e) => {
+              deletItem(id);
+              e.stopPropagation();
+            }}
+            className="far fa-trash-alt"
+          />
           <i
             onClick={() => {
               setEditMode(!editMode);

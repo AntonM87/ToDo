@@ -6,35 +6,32 @@ import Counters from "./layout/Counters";
 import "./App.scss";
 
 function App() {
-  const todoStorage = JSON.parse(localStorage.getItem("todos")) || [];
+  const todoStorage = JSON.parse(localStorage.getItem('todos')) || [];
   const [todos, setToDos] = useState(todoStorage);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState('all');
   const [currentTask, setCurrentTask] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
   });
 
   const addItem = (e) => {
-    if (!validation(e.target[0].value)) {
-      e.target.value = "";
-      alert("Не валидное задание");
-      e.preventDefault();
-      return;
+    if (validation(e.target[0].value)) {
+      setToDos([
+        { id: nanoid(), text: e.target[0].value, complited: false },
+        ...todos,
+      ]);
+    } else {
+      alert('Не валидное задание');
     }
 
-    setToDos([
-      { id: nanoid(), text: e.target[0].value, complited: false },
-      ...todos,
-    ]);
-    e.target[0].value = "";
+    e.target[0].value = '';
     e.preventDefault();
   };
 
-  const complitHandler = async (idTask) => {
-    const task = await todos.find(({ id }) => id === idTask);
-    const taskStatus = task.complited;
-    task.complited = !taskStatus;
+  const complitHandler = (idTask) => {
+    const task = todos.find(({ id }) => id === idTask);
+    task.complited = !task.complited;
     setToDos([...todos]);
   };
 
@@ -58,10 +55,10 @@ function App() {
   const filteredTodos = () => {
     let result;
     switch (filter) {
-      case "unfinished":
+      case 'unfinished':
         result = unfinishedFilter(todos);
         break;
-      case "finished":
+      case 'finished':
         result = finishedFilter(todos);
         break;
       default:
@@ -72,18 +69,18 @@ function App() {
   };
 
   const dragStartHandler = (e, index) => {
-    e.target.style.opacity = "1";
+    e.target.classList.add('drop-start');
     setCurrentTask(index);
   };
   const dragEndHandler = (e) => {
-    e.target.style.opacity = "1";
+    e.target.classList.add('drop-start');
   };
   const dragOverHandler = (e) => {
-    e.target.style.opacity = "0.5";
+    e.target.classList.add('drop-end');
     e.preventDefault();
   };
   const dropHandler = (e, index) => {
-    e.target.style.opacity = "1";
+    e.target.classList.add('drop-start');
 
     todos.forEach((todo, i) => {
       if (index === i) {
@@ -134,7 +131,7 @@ function App() {
 export default App;
 
 const validation = (text) => {
-  if (text !== "" && text.length > 3) {
+  if (typeof(text) === 'string' && text.length > 3) {
     return text;
   }
   return false;

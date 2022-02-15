@@ -18,7 +18,7 @@ function App() {
   const addItem = (e) => {
     if (validation(e.target[0].value)) {
       setToDos([
-        { id: nanoid(), text: e.target[0].value, complited: false },
+        { id: nanoid(), text: e.target[0].value, completed: false },
         ...todos,
       ]);
     } else {
@@ -29,14 +29,14 @@ function App() {
     e.preventDefault();
   };
 
-  const complitHandler = (idTask) => {
+  const completedHandler = (idTask) => {
     const task = todos.find(({ id }) => id === idTask);
-    task.complited = !task.complited;
+    task.completed = !task.completed;
     setToDos([...todos]);
   };
 
-  const deletItem = async (taskId) => {
-    setToDos([...(await todos.filter(({ id }) => id != taskId))]);
+  const deleteItem = async (taskId) => {
+    setToDos([...(await todos.filter(({ id }) => id !== taskId))]);
   };
 
   const editItem = (idTask, text) => {
@@ -48,9 +48,9 @@ function App() {
   };
 
   const unfinishedFilter = (todos) =>
-    todos.filter(({ complited }) => !complited);
+    todos.filter(({ completed }) => !completed);
 
-  const finishedFilter = (todos) => todos.filter(({ complited }) => complited);
+  const finishedFilter = (todos) => todos.filter(({ completed }) => completed);
 
   const filteredTodos = () => {
     let result;
@@ -95,17 +95,17 @@ function App() {
     e.preventDefault();
   };
 
-  const taskList = filteredTodos().map(({ id, text, complited }, index) => (
+  const taskList = filteredTodos().map(({ id, text, completed }, index) => (
     <Task
       id={id}
       key={id}
       text={text}
       todos={todos}
       index={index}
-      complitedStatus={complited}
-      deletItem={deletItem}
+      completedStatus={completed}
+      deleteItem={deleteItem}
       editItem={editItem}
-      complitHandler={complitHandler}
+      completedHandler={completedHandler}
       dragStartHandler={dragStartHandler}
       dragEndHandler={dragEndHandler}
       dragOverHandler={dragOverHandler}

@@ -1,7 +1,7 @@
 import "../Styles/Counters.scss";
 export default function Counters({ todos }) {
-  let complitedTasks = 0;
-  todos.forEach(({ complited }) => (complited ? complitedTasks++ : null));
+  let completedTasks = 0;
+  todos.forEach(({ completed }) => (completed ? completedTasks++ : null));
 
   return (
     <div className="counters">
@@ -9,7 +9,7 @@ export default function Counters({ todos }) {
         <p>Всего: {todos.length}</p>
       </div>
       <div>
-        <p>Выполнено: {complitedTasks}</p>
+        <p>Выполнено: {completedTasks}</p>
       </div>
     </div>
   );

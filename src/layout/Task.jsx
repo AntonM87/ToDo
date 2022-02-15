@@ -3,12 +3,12 @@ import { useState } from "react";
 function Task({
   id,
   text,
-  complitedStatus,
+  completedStatus,
   todos,
   index,
-  deletItem,
+  deleteItem,
   editItem,
-  complitHandler,
+  completedHandler,
   dragStartHandler,
   dragEndHandler,
   dragOverHandler,
@@ -19,7 +19,9 @@ function Task({
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState(text);
 
-  const className = complitedStatus ? "complited" : "";
+   console.log('completedStatus', completedStatus);
+
+  const className = completedStatus ? "completed" : "";
 
   const editTask = () => {
     return (
@@ -27,7 +29,7 @@ function Task({
         onSubmit={(e) => {
           editItem(id, e.target[0].value);
           setEditMode(!editMode);
-          complitHandler(id);
+          completedHandler(id);
           e.preventDefault();
         }}
       >
@@ -52,7 +54,7 @@ function Task({
         onDrop={(e) => dropHandler(e, index)}
         draggable={true}
         onClick={() => {
-          complitHandler(id);
+          completedHandler(id);
         }}
         className={`todo ${className}`}
       >
@@ -62,7 +64,7 @@ function Task({
         <div>
           <i
             onClick={(e) => {
-              deletItem(id);
+              deleteItem(id);
               e.stopPropagation();
             }}
             className="far fa-trash-alt"

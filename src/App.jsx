@@ -35,8 +35,8 @@ function App() {
     setToDos([...todos]);
   };
 
-  const deleteItem = async (taskId) => {
-    setToDos([...(await todos.filter(({ id }) => id !== taskId))]);
+  const deleteItem = (taskId) => {
+    setToDos([...( todos.filter(({ id }) => id !== taskId))]);
   };
 
   const editItem = (idTask, text) => {
